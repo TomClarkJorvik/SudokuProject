@@ -22,16 +22,15 @@ public:
 	void Show();
 	void ShowKnownBoard();
 	void ShowHiddenBoard();
-	void ShowSolvedBoard();
 
 	bool CheckIfWon();
 	void CheckForKnownNumbers();
 	void ResetBoardToKnown();
 
-	bool SudokuSolver(int** inputBoard); 
+	int SudokuSolver(int** inputBoard); 
 private:
 	void CreateHiddenFullBoard();
-	bool SudokuSolverRecursion();
+	int SudokuSolverRecursion();
 	bool FindEmptyLocation(int arr[2]);
 
 	int basicBoard[9][9] = { {1, 2, 3, 4, 5, 6, 7, 8, 9},
