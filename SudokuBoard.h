@@ -16,6 +16,7 @@ public:
 
 	int TakeAction(int row, int col, int number);
 	void Show();
+	void ShowKnownBoard();
 	void ShowHiddenBoard();
 
 	bool CheckIfWon();

@@ -5,6 +5,7 @@ using namespace std;
 SudokuGame::SudokuGame(int difficulty)
 {
 	gameRunning = true;
+	cout << "When asked for row input, type r to reset the board to only known numbers, type c to check which numbers are correct,\ntype k to show known values, or type a number to proceed to take an action.\n\n";
 	board = new SudokuBoard(difficulty);
 }
 
@@ -20,13 +21,47 @@ void SudokuGame::ShowHiddenBoard()
 
 void SudokuGame::RecieveInput()
 {
+	string firstInput;
+	char* endptr = nullptr;
+	const char* input_ptr;
+	int value; 
+	bool firstInputIsNumber;
+
 	int row = 0;
 	int col = 0;
 	int number = 0;
 	bool legalInput = false;
 	while (!legalInput) {
-		cout << endl << "Row: ";
-		cin >> row;
+		firstInputIsNumber = false;
+		while (!firstInputIsNumber) {
+			cout << endl << "Row: ";
+			cin >> firstInput;
+			input_ptr = firstInput.c_str();
+			if (firstInput.size() == 1) {
+				if (firstInput[0] == 'r' || firstInput[0] == 'R') {
+					std::cout << "Resetting board to only known values." << std::endl;
+					board->ResetBoardToKnown();
+					board->Show();
+				}
+				else if (firstInput[0] == 'c' || firstInput[0] == 'C') {
+					std::cout << "Checking board for known values.\nShowing known values." << std::endl;
+					board->CheckForKnownNumbers();
+					board->ShowKnownBoard();
+				}
+				else if (firstInput[0] == 'k' || firstInput[0] == 'K') {
+					std::cout << "Outputting only known values." << std::endl;
+					board->ShowKnownBoard();
+				}
+				else {
+					row = std::strtol(input_ptr, &endptr, 10);
+					firstInputIsNumber = true;
+				}
+			}
+			else {
+				row = std::strtol(input_ptr, &endptr, 10);
+				firstInputIsNumber = true;
+			}
+		}
 		cout << "Column: ";
 		cin >> col;
 		cout << "Number: ";

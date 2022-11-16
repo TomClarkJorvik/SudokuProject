@@ -121,6 +121,32 @@ void SudokuBoard::Show()
     }
 }
 
+void SudokuBoard::ShowKnownBoard()
+{
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++) {
+            if (j % 3 == 0 && j != 0) {
+                cout << "| ";
+            }
+            cout << knownBoard[i][j] << " ";
+        }
+        if (i % 3 == 2 && i != N - 1) {
+            cout << endl;
+            for (int z = 0; z < N; z++) {
+
+                if (z % 3 == 0 && z != 0) {
+                    cout << "| ";
+                }
+
+                cout << "- ";
+
+            }
+        }
+        cout << endl;
+    }
+}
+
 void SudokuBoard::ShowHiddenBoard()
 {
     for (int i = 0; i < N; i++)
