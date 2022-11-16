@@ -179,7 +179,7 @@ int SudokuBoard::TakeAction(int row, int col, int number)
         if (!CheckRow(row, number) && !CheckColumn(col, number) && !CheckBlock((row / 3) * 3, (col / 3) * 3,number)) {
             // if the number can fit in that row, column and block, then add it to the board and return 0.
             board[row][col] = number;
-
+            return 0;
         }
         else {
             // if the number is already present in that row, column or block, then return 1.
@@ -213,7 +213,7 @@ void SudokuBoard::CheckForKnownNumbers()
     {
         for (int j = 0; j < N; j++) {
             if (board[i][j] == hiddenFullBoard[i][j]) {
-                knownBoard[i][j] == board[i][j];
+                knownBoard[i][j] = hiddenFullBoard[i][j];
             }
         }
     }
